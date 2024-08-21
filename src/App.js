@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Counter />
+    </>
   );
 }
 
-export default App;
+function Counter(props) {
+  const [step, setStep] = useState(1);
+  const [count, setCount] = useState(0);
+  const date = new Date("nov 16 2000");
+  date.setDate(date.getDate() + count);
+  const handleStepMinus = function () {
+    setStep((c) => c - 1);
+  };
+  const handleStepPlus = function () {
+    setStep((c) => c + 1);
+  };
+  const handleCountMinus = function () {
+    setCount((c) => c - step);
+  };
+  const handleCountPlus = function () {
+    setCount((c) => c + step);
+  };
+
+  return (
+    <>
+      <button onClick={handleStepMinus}>-</button>
+      <h2 style={{ display: "inline" }}>Step :{step}</h2>
+      <button onClick={handleStepPlus}>+</button>
+      <br />
+      <button onClick={handleCountMinus}>-</button>
+      <h2 style={{ display: "inline" }}>Count :{count}</h2>
+      <button onClick={handleCountPlus}>+</button>
+      <h2>
+        {count === 0
+          ? `today is ${date.toDateString()}`
+          : `${count} days from today is ${date.toDateString()}`}
+      </h2>
+    </>
+  );
+}
